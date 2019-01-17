@@ -52,7 +52,7 @@ int main()
 {
     int t;
     int o1,o2,a1,a2,b1,b2;
-    cin>>t;
+    scin(t);
     for(int k=1; k<=t; k++)
     {
         cin>>o1>>o2>>a1>>a2>>b1>>b2;
@@ -61,7 +61,7 @@ int main()
         double B=(double)sqrt((o1-a1)*(o1-a1) + (o2-a2)*(o2-a2));
         double ang=acos(((A*A)+(B*B)-(O*O))/(2.0*A*B));
         double ans=A*ang;
-        printf("Case %d: %.8f\n",k,ans);
+        pf("Case %d: %.8f\n",k,ans);
     }
     return 0;
 }
