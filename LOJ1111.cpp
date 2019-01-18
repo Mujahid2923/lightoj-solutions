@@ -51,7 +51,7 @@ using namespace std;
 vector<int>graph[10005];
 int visited[1005];
 vector<int>v;
-map<int,int>mp;
+map<int,int>Mp;
 
 void BFS(int s)
 {
@@ -59,7 +59,7 @@ void BFS(int s)
     queue<int>q;
     q.push(s);
     visited[s]=1;
-    mp[s]++;
+    Mp[s]++;
 
     while(!q.empty())
     {
@@ -72,7 +72,7 @@ void BFS(int s)
             {
                 q.push(v);
                 visited[v]=1;
-                mp[v]++;
+                Mp[v]++;
             }
         }
     }
@@ -104,7 +104,7 @@ int main()
         int f=0;
         for(int j=1; j<=n; j++)
         {
-            if(mp[j]==k)
+            if(Mp[j]==k)
             {
                 f++;
             }
@@ -117,7 +117,7 @@ int main()
             visited[j]=0;
         }
         v.clear();
-        mp.clear();
+        Mp.clear();
     }
 }
 /*
