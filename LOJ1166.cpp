@@ -83,6 +83,11 @@ int main()
                     break;
                 }
             }
+//            for(int j=0; j<n; j++)
+//            {
+//                cout<<v1[j]<<" ";
+//            }
+//            cout<<endl;
             for(int j=0; j<n; j++)
             {
                 if(v1[j]!=v2[j])
