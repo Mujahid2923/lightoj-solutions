@@ -92,7 +92,6 @@ void BinSearch( ll low, ll high )
     //cout <<"ans " << ans << endl ;
 
     ll sum = 0 ;
-    ll co = 0 ;
     for( int i = 0 ; i < v.size() ; i ++ )
     {
         sum += v[ i ] ;
@@ -100,9 +99,8 @@ void BinSearch( ll low, ll high )
         {
             vec.pb( sum - v[ i ] ) ;
             sum = v[ i ] ;
-            co ++ ;
         }
-        if( k - co + 1 >= v.size() - i )
+        if( k - vec.size() + 1 == v.size() - i )
         {
             if( sum > ans )
             {
@@ -128,19 +126,13 @@ int main()
     {
         cnt ++ ;
         cin >> n >> k ;
-        ll p = INT_MIN ;
-        ll q = 0 ;
         for( int i = 0 ; i <= n ; i ++ )
         {
             cin >> a ;
-            p = max( p , a ) ;
-            q += a ;
             v.pb( a ) ;
         }
 
-        ll x = min( p , q ) ;
-        ll y = max( p , q ) ;
-        BinSearch( x, y ) ;
+        BinSearch( 1, 100001 ) ;
 
 
         ll mx = INT_MIN ;
@@ -160,4 +152,3 @@ int main()
 
     return 0 ;
 }
-
