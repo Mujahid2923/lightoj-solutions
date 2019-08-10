@@ -1,13 +1,13 @@
 আমরা জানি, 10 based number system এ x এর ডিজিট সংখ্যা = ⌊log10x⌋+1
 একইভাবে, b based number system এ x এর ডিজিট সংখ্যা = ⌊logbx⌋+1
 লগারিদমের সূত্রানুসারে,
-logxy=logxz×logzy
-⟹logzy=logxylogxz
-∴logbn=log10nlog10b
+logxy = logxz * logzy
+⟹logzy = logxy / logxz
+∴logbn=log10n / log10b
 
 আবার, আমরা জানি,
-log10(x×y×z)=log10x+log10y+log10z
-যেহেতু, n!=1∗2∗3∗4∗..........∗n , অতএব, 
+log10(x * y * z)=log10x+log10y+log10z
+যেহেতু, n! = 1 * 2 * 3 * 4 *..........* n  , অতএব, 
 log10(n!)=log101+log102+..........+log10n
 
 অতএব, আমরা আগেই 106 পর্যন্ত সব সংখ্যার log এর মান বের করে অ্যারেতে রাখব ।
