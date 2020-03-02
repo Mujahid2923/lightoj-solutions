@@ -48,61 +48,66 @@ using namespace std;
 ///const int fy[] = {-1,+1,-2,+2,-2,+2,-1,+1}; ///knight's move
 ///---------------------------------------------------------------
 
-#define MAX 500000
-ll tree[MAX*3];
+#define mx 100005
+ll Tree[ mx * 4 ];
+ll arr[ mx ];
 
-void init(ll *arr,ll node,ll b,ll e)
+void init( int node, int b, int e )
 {
-    if(b==e)
+    int Lnode = node << 1 ;
+    int Rnode= Lnode + 1 ;
+    int mid = ( b + e ) >> 1 ;
+
+    if( b == e )
     {
-        tree[node]=arr[b];
+        Tree[ node ] = arr[ b ] ;
         return;
     }
-    ll Lnode=node*2;
-    ll Rnode=node*2+1;
-    ll mid=(b+e)/2;
-    init(arr,Lnode,b,mid);
-    init(arr,Rnode,mid+1,e);
-    tree[node]=min(tree[Lnode],tree[Rnode]);
+
+
+    init( Lnode, b, mid ) ;
+    init( Rnode, mid + 1, e ) ;
+    Tree[ node ] = min( Tree[ Lnode ],Tree[ Rnode ] ) ;
 }
 
-int findmin(ll node,ll b,ll e,ll i,ll j)
+int Findmin(int node,int b,int e,int i,int j)
 {
-    if(i>e || j<b)
+    int Lnode = node << 1 ;
+    int Rnode= Lnode + 1 ;
+    int mid = ( b + e ) >> 1 ;
+
+    if( i > e || j < b )
     {
-        return INT_MAX;
+        return INT_MAX ;
     }
-    if(b>=i && e<=j)
+    if( b >= i && e <= j )
     {
-        return tree[node];
+        return Tree[ node ] ;
     }
-    ll Lnode=node*2;
-    ll Rnode=node*2+1;
-    ll mid=(b+e)/2;
-    ll m1=findmin(Lnode,b,mid,i,j);
-    ll m2=findmin(Rnode,mid+1,e,i,j);
+
+    int m1 = Findmin( Lnode, b, mid, i, j ) ;
+    int m2 = Findmin( Rnode, mid + 1, e, i, j ) ;
     return min(m1,m2);
 }
 
 int main()
 {
-    ll t,n,q,a,b;
-    scanf("%lld",&t);
-    for(ll j=1; j<=t; j++)
+    int t, n, q, a, b ;
+    scin( t ) ;
+    for( int j = 1 ; j <= t ; j ++ )
     {
-        scanf("%lld %lld",&n,&q);
-        ll arr[n+1];
-        for(ll i=1; i<=n; i++)
+        scin2( n, q ) ;
+        for( int i = 1 ; i <= n ; i ++ )
         {
-            scanf("%lld",&arr[i]);
+            scin( arr[ i ] ) ;
         }
-        init(arr,1,1,n);
-        printf("Case %lld:\n",j);
-        for(ll i=1; i<=q; i++)
+        init( 1, 1, n ) ;
+        printf( "Case %d:\n", j ) ;
+        for(int i=1; i<=q; i++)
         {
-            scanf("%lld %lld",&a,&b);
-            ll mn=findmin(1,1,n,a,b);
-            printf("%lld\n",mn);
+            scin2( a, b ) ;
+            int mn = Findmin( 1, 1, n, a, b ) ;
+            printf( "%d\n", mn ) ;
         }
     }
     return 0;
