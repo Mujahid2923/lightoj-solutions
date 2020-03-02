@@ -1,43 +1,52 @@
-#include<bits/stdc++.h>
-
 ///...................................*****.................................................///
 ///                  Mujahidul Islam ( mujahidulislam2923@gmail.com )                       ///
 ///                  Department of Ict                                                      ///
 ///                  Comilla University , Bangladesh.                                       ///
 ///...................................*****.................................................///
 
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
 using namespace std;
-#define           CIN              ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0)
-#define           ll               long long int
-#define           ull              unsigned long long int
-#define           pii              pair < int, int>
-#define           pll              pair < ll, ll>
-#define           MOD              1000000007
-#define           vi               vector<int>
-#define           vl               vector<ll>
-#define           pb               push_back
-#define           sc               scanf
-#define           pf               printf
-#define         scin(x)            scanf("%d",&(x))
-#define        scin2(x,y)          scanf("%d %d",&(x),&(y))
-#define         scln(x)            scanf("%lld",&(x))
-#define        scln2(x,y)          scanf("%lld %lld",&(x),&(y))
-#define       min3(a,b,c)          min(a,min(b,c))
-#define       min4(a,b,c,d)        min(d,min(a,min(b,c)))
-#define       max3(a,b,c)          max(a,max(b,c))
-#define       max4(a,b,c,d)        max(d,max(a,max(b,c)))
-#define         ms(a,b)            memset(a,b,sizeof(a))
-#define           mp               make_pair
-#define       gcd(a, b)            __gcd(a,b)
-#define       lcm(a, b)            ((a)*(b)/gcd(a,b))
-#define         input              freopen("input.txt","rt", stdin)
-#define         output             freopen("output.txt","wt", stdout)
-#define           PI               2*acos(0.0)
-#define     rep( i , a , b )       for( i=a ; i<b ; i++)
-#define     rev( i , a , b )       for( i=a ; i>=b ; i--)
-#define     repx( i ,a,b, x)       for( i=a ; i<b ; i+=x)
-#define       CASEL(t)             printf("Case %d:\n",t)
-#define     RUN_CASE(t,T)          for(__typeof(t) t=1;t<=T;t++)
+using namespace __gnu_pbds;
+template<typename T> using orderset = tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>;
+
+#define          CIN                    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0)
+#define          ll                     long long int
+#define          ld                     long double
+#define          ull                    unsigned long long int
+#define          pii                    pair < int, int>
+#define          pll                    pair < ll, ll>
+#define          MOD                    1000000007
+#define          vi                     vector<int>
+#define          vl                     vector<ll>
+#define          pb                     push_back
+#define          sc                     scanf
+#define          pf                     printf
+#define          scin(x)                scanf("%d",&(x))
+#define          scin2(x,y)             scanf("%d %d",&(x),&(y))
+#define          scln(x)                scanf("%lld",&(x))
+#define          scln2(x,y)             scanf("%lld %lld",&(x),&(y))
+#define          min3(a,b,c)            min(a,min(b,c))
+#define          min4(a,b,c,d)          min(d,min(a,min(b,c)))
+#define          max3(a,b,c)            max(a,max(b,c))
+#define          max4(a,b,c,d)          max(d,max(a,max(b,c)))
+#define          ms(a,b)                memset(a,b,sizeof(a))
+#define          mp                     make_pair
+#define          gcd(a, b)              __gcd(a,b)
+#define          lcm(a, b)              ((a)*(b)/gcd(a,b))
+#define          input                  freopen("input.txt","rt", stdin)
+#define          output                 freopen("output.txt","wt", stdout)
+#define          PI                     acos(-1.0)
+#define          zero(a)                memset(a,0,sizeof a)
+#define          all(v)                 v.begin(),v.end()
+#define          Max(v)                 *max_element(all(v))
+#define          Min(v)                 *min_element(all(v))
+#define          Upper(c,x)             (upper_bound(c.begin(),c.end(),x)-c.begin())
+#define          Lower(c,x)             (lower_bound(c.begin(),c.end(),x)-c.begin())
+#define          Unique(X)              (X).erase(unique(all(X)),(X).end())
+#define          no                     cout << "NO" << endl ;
+#define          yes                    cout << "YES" << endl ;
 
 ///--------------Graph Moves--------------------------------------
 ///const int fx[] = {+1,-1,+0,+0};
@@ -49,144 +58,116 @@ using namespace std;
 ///---------------------------------------------------------------
 
 #define MAX 100000
-ll tree[MAX*4];
+ll Tree[ MAX * 4 ] ;
+ll arr[ MAX ];
 
-void init(ll *arr,ll node,ll b,ll e)
+void init( int node,int b,int e )
 {
-    if(b==e)
+    int Lnode = node << 1 ;
+    int Rnode= ( node << 1 ) + 1 ;
+    int mid= ( b + e ) >> 1 ;
+
+    if( b == e )
     {
-        tree[node]=arr[b];
-        return;
+        Tree[ node ] = arr[ b ] ;
+        return ;
     }
-    ll Lnode=node*2;
-    ll Rnode=node*2+1;
-    ll mid=(b+e)/2;
 
-    init(arr,Lnode,b,mid);
-    init(arr,Rnode,mid+1,e);
 
-    tree[node]=tree[Lnode]+tree[Rnode];
+    init( Lnode, b, mid ) ;
+    init( Rnode, mid + 1, e ) ;
+
+    Tree[ node ] = Tree[ Lnode ] + Tree[ Rnode ] ;
 }
 
-ll donateAll(ll node,ll b,ll e,ll i)
+int query( int node, int b, int e, int i, int j )
 {
-    if(b > i || e < i)
+    int Lnode = node << 1 ;
+    int Rnode= ( node << 1 ) + 1 ;
+    int mid= ( b + e ) >> 1 ;
+
+    if( b > j || e < i )
     {
-        return 0;
+        return 0 ;
     }
 
-    if(b>=i && e<=i)
+    if( b >= i && e <= j )
     {
-        return tree[node];
+        return Tree[ node ] ;
     }
 
-    ll Lnode=node*2;
-    ll Rnode=node*2+1;
-    ll mid=(b+e)/2;
+    int s1 = query( Lnode, b, mid, i, j ) ;
+    int s2 = query( Rnode, mid + 1, e, i, j ) ;
 
-    ll d1=donateAll(Lnode,b,mid,i);
-    ll d2=donateAll(Rnode,mid+1,e,i);
-    return d1+d2;
+    return s1 + s2 ;
+
 }
 
-void update(ll node,ll b,ll e,ll i,ll v)
+
+void update( int node, int b, int e, int i, int newvalue )
 {
-    if(i>e || i<b)
+    int Lnode = node << 1 ;
+    int Rnode= ( node << 1 ) + 1 ;
+    int mid= ( b + e ) >> 1 ;
+
+    if( i > e || i < b )
     {
-        return;
+        return ;
     }
 
-    if(b>=i && e<=i)
+    if( b >= i && e <= i )
     {
-        tree[node]=tree[node]+v;
-        return;
+        Tree[ node ] += newvalue ;
+        return ;
     }
-    ll Lnode=node*2;
-    ll Rnode=node*2+1;
-    ll mid=(b+e)/2;
-    update(Lnode,b,mid,i,v);
-    update(Rnode,mid+1,e,i,v);
-    tree[node]=tree[Lnode]+tree[Rnode];
+
+    update( Lnode, b, mid, i, newvalue ) ;
+    update( Rnode, mid + 1, e, i, newvalue ) ;
+
+    Tree[ node ] = Tree[ Lnode ] + Tree[ Rnode ] ;
+
 }
 
-void update2(ll node,ll b,ll e,ll i)
-{
-    if(i>e || i<b)
-    {
-        return;
-    }
-
-    if(b>=i && e<=i)
-    {
-        tree[node]=0;
-        return;
-    }
-    ll Lnode=node*2;
-    ll Rnode=node*2+1;
-    ll mid=(b+e)/2;
-    update2(Lnode,b,mid,i);
-    update2(Rnode,mid+1,e,i);
-    tree[node]=tree[Lnode]+tree[Rnode];
-}
-
-ll sum(ll node,ll b,ll e,ll i,ll j)
-{
-    if(j<b || i>e)
-    {
-        return 0;
-    }
-    if(b>=i && e<=j)
-    {
-        return tree[node];
-    }
-    ll Lnode=node*2;
-    ll Rnode=node*2+1;
-    ll mid=(b+e)/2;
-
-    ll s1=sum(Lnode,b,mid,i,j);
-    ll s2=sum(Rnode,mid+1,e,i,j);
-    return s1+s2;
-}
 
 int main()
 {
-    ll t,n,q,ck,a,v,b;
-    scanf("%lld",&t);
-    for(ll k=1; k<=t; k++)
+    int t, n, q, ck, a, val, b ;
+    scin( t ) ;
+    for( int k = 1 ; k <= t ; k ++ )
     {
-        scanf("%lld %lld",&n,&q);
-        ll arr[n+10];
-        for(ll i=1; i<=n; i++)
+        scin2( n, q ) ;
+        for( int i = 1 ; i <= n ; i ++ )
         {
-            scanf("%lld",&arr[i]);
+            scln( arr[ i ] ) ;
         }
-        init(arr,1,1,n);
-        printf("Case %lld:\n",k);
-        for(ll i=0; i<q; i++)
+
+        init( 1, 1, n ) ;
+        printf( "Case %d:\n", k ) ;
+        for( int i = 0 ; i < q ; i ++ )
         {
-            scanf("%lld",&ck);
-            if(ck==1)
+            scin( ck ) ;
+            if( ck == 1 )
             {
-                scanf("%lld",&a);
-                ll ans=donateAll(1,1,n,a+1);
-                printf("%lld\n",ans);
-                update2(1,1,n,a+1);
+                scin( a ) ;
+                int ans = query( 1, 1, n, a + 1, a + 1 );
+                printf( "%d\n", ans ) ;
+                update( 1, 1, n, a + 1, -ans );
             }
-            else if(ck==2)
+            else if(ck == 2 )
             {
-                scanf("%lld %lld",&a,&v);
-                update(1,1,n,a+1,v);
+                scin2( a, val ) ;
+                update( 1, 1, n, a + 1, val );
 
             }
             else
             {
-                scanf("%lld %lld",&a,&b);
-                ll ans=sum(1,1,n,a+1,b+1);
-                printf("%lld\n",ans);
+                scin2( a, b ) ;
+                int ans = query( 1, 1, n, a + 1, b + 1 ) ;
+                printf( "%d\n", ans ) ;
             }
         }
-        memset(arr,0,sizeof arr);
-        memset(tree,0,sizeof tree);
+        zero( arr ) ;
+        zero( Tree ) ;
     }
     return 0;
 }
