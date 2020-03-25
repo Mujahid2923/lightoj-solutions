@@ -73,6 +73,8 @@ vector < int > adj[ 5 ] ;
 int DP[ 50 ][ 5 ] ;
 int t, n, a, b, c ;
 
+--------------------------------*****************--------------------------------------
+
 int Fun( int pos, int ck )
 {
     if( pos < 0 )
@@ -105,7 +107,31 @@ int Fun( int pos, int ck )
         return DP[ pos ][ ck ] = ans ;
     }
 }
+---------------------------****************----------------------------------------
+int Fun( int pos, int ck )
+{
+    if( pos < 0 )
+    {
+        return 0 ;
+    }
 
+    if( DP[ pos ][ ck ] != -1 )
+    {
+        return DP[ pos ][ ck ] ;
+    }
+
+    int ans = INT_MAX ;
+    for( int i = 1 ; i <= 3 ; i ++ )
+    {
+        if( ck != i )
+        {
+            ans = min( ans, adj[ i ][ pos ] + Fun( pos - 1, i ) ) ;
+        }
+    }
+    return DP[ pos ][ ck ] = ans ;
+}
+
+-------------------------------*************--------------------------------------
 int main()
 {
 
