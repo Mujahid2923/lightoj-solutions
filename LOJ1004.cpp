@@ -1,9 +1,3 @@
-///...................................*****.................................................///
-///                  Mujahidul Islam ( mujahidulislam2923@gmail.com )                       ///
-///                  Department of Ict                                                      ///
-///                  Comilla University , Bangladesh.                                       ///
-///...................................*****.................................................///
-
 #include<bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
@@ -75,14 +69,11 @@ int calling( int i, int j )
 {
     if( i >= 0 && i < row && j >= 0 && j < col || arr[ i ][ j ] != 0 )
     {
-        if( DP[ i ][ j ] != -1 )
-        {
-            return DP[ i ][ j ] ;
-        }
-        int ans = 0 ;
-        ans = max( ans, calling( i + 1, j ) + arr[ i ][ j ] ) ;
-        ans = max( ans, calling( i + 1, j + 1 ) + arr[ i ][ j ] ) ;
-        return DP[ i ][ j ] = ans ;
+        if( DP[ i ][ j ] != -1 ) return DP[ i ][ j ] ;
+
+        int r1 = calling( i + 1, j ) + arr[ i ][ j ] ;
+        int r2 = calling( i + 1, j + 1 ) + arr[ i ][ j ] ;
+        return DP[ i ][ j ] = max( r1 , r2 ) ;
     }
     else
     {
@@ -121,4 +112,3 @@ int main()
     }
     return 0 ;
 }
-
