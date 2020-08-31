@@ -27,6 +27,8 @@ using namespace std;
 #define          yes                    cout << "YES" << endl ;
 #define          segment_tree           int Lnode = node << 1 , Rnode = Lnode + 1 , mid = ( b + e ) >> 1 ;
 #define          siz                    100005
+int dx[] = { +1, -1, +0, +0 } ;
+int dy[] = { +0, +0, +1, -1 } ;
 
 ///--------------------**********----------------------------------
 
@@ -46,8 +48,7 @@ struct data
     pii A, B, C ;
 };
 
-int dx[] = { +1, -1, +0, +0 } ;
-int dy[] = { +0, +0, +1, -1 } ;
+
 int level[ 12 ][ 12 ][ 12 ][ 12 ][ 12 ][ 12 ], visited[ 12 ][ 12 ][ 12 ][ 12 ][ 12 ][ 12 ] ;
 char s[ 12 ][ 12 ] ;
 
@@ -102,8 +103,8 @@ int bfs( data S )
 
             if( v.A == v.B )
             {
-                if( v.B == v.C ) v.C = u.C ;
                 v.A = u.A, v.B = u.B ;
+                if( v.B == v.C ) v.C = u.C ;
             }
 
             if( v.A == v.C ) v.A = u.A, v.C = u.C ;
