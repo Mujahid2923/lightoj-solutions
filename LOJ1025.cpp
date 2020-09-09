@@ -136,11 +136,11 @@ int main()
 I hope this explanation makes the solution clear to you.
 If there is just one character in the string, it is a palindrome.
 If there are more characters left in the string,
-you can remove character from left rec(i+1, j) or right rec(i, j-1).
-But in both recursions you will count rec(i+1, j-1).
+you can remove character from left Fun( i + 1, j ) or right Fun( i, j - 1 ).
+But in both recursions you will count Fun( i + 1, j - 1 ) .
 To avoid counting twice, we subtract it from ret.
-There is only one case left: when str[i] == str[j],
+There is only one case left: when str[ i ] == str[ j ] ,
 you can keep both characters (do not remove them) and
-then you should call rec(i+1, j-1) to build the middle and
+then you should call Fun( i + 1, j - 1 ) to build the middle and
 we add one because we never count the palindrome consisting of just these two characters.
 
