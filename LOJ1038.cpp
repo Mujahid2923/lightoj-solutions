@@ -80,7 +80,7 @@ double dp[ 100005 ] ;
 
 void pre()
 {
-    for( int i = 2 ; i <= 50 ; i ++ )
+    for( int i = 2 ; i <= 100000 ; i ++ )
     {
         double a = 0 , b = 0 ;
         for( int j = 1 ; j * j <= i ; j ++ )
