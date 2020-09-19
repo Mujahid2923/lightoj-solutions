@@ -229,3 +229,27 @@ int main()
     return 0 ;
 }
 
+/*
+ 
+ 
+Firstly bi-colored all nodes using a simple dfs. After that all red nodes is on left side
+and all black nodes on the right side. Now made connection between nodes according to given edge.
+Result is: N - bpm.
+ 
+ 
+Why it works?
+-------------
+ 
+We need to find maximum set which are not connected at all. 
+As we calculated bpm, it's maximum flow that can run through this network.
+ 
+Now, we know max-flow = min-cut.
+Here in bipartite graph, min-cut will be applied only on the edges like source->node or node->sink (can be proven
+by greedy choice).
+Thus, min-cut means: minimum number of node to be deleted to make this graph disconnected, i.e, no flow will
+pass through this network after removing those node.
+ 
+so, (N - bpm) is maximum set size which are not connected by any edge. That's the answer.
+ 
+*/
+ 
